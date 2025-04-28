@@ -57,7 +57,6 @@ void static_path(const int accepted_socket, const char *path_file, const char *r
         return;
     }   
     //Get file size
-    //struct stat file_stat;
     fstat(file_fd, &file_stat);
     off_t file_size = file_stat.st_size;
     
