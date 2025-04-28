@@ -36,19 +36,28 @@ void static_path(const int accepted_socket, const char *path_file, const char *r
     char header[HEADER_SIZE];
     char buffer[BUFFER_SIZE];
     int header_length;
-    const char *extension = strrchr(path_file, '.');
-    const char *content_type = get_mime_type(extension);
-    
-    if(extension == NULL ) {
+
+    struct stat file_stat;
+    //Check if the file exist do not exist or the path is a directory which is not possible
+    if (stat(real_path, &file_stat) < 0 || S_ISDIR(file_stat.st_mode)) {
         return;
     }
+
+    const char *extension = strrchr(path_file, '.');
+    
+    //Check if extension exist
+    if(!extension) {
+        return;
+    }
+
+    const char *content_type = get_mime_type(extension);
     
     int file_fd = open(real_path, O_RDONLY);
     if (file_fd < 0) {
         return;
     }   
     //Get file size
-    struct stat file_stat;
+    //struct stat file_stat;
     fstat(file_fd, &file_stat);
     off_t file_size = file_stat.st_size;
     
