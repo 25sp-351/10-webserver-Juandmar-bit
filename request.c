@@ -40,6 +40,7 @@ void static_path(const int accepted_socket, const char *path_file, const char *r
     struct stat file_stat;
     //Check if the file exist do not exist or the path is a directory which is not possible
     if (stat(real_path, &file_stat) < 0 || S_ISDIR(file_stat.st_mode)) {
+        not_found(accepted_socket);
         return;
     }
 
@@ -47,6 +48,7 @@ void static_path(const int accepted_socket, const char *path_file, const char *r
     
     //Check if extension exist
     if(!extension) {
+        not_found(accepted_socket);
         return;
     }
 
