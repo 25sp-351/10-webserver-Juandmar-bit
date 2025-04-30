@@ -85,7 +85,7 @@ void sec_path (const int accepted_socket, const char *path_file) {
     int header_length;
     int seconds;
 
-    if (sscanf(path_file, "/sec/%d", &seconds) != 1) {
+    if (sscanf(path_file, "/sleep/%d", &seconds) != 1) {
         return;
     }
     sleep(seconds);
