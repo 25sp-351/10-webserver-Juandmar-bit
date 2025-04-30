@@ -33,7 +33,7 @@ void http_response(const char *path_file, int accepted_socket) {
         return;
     }
 
-    if (strncmp(path_file, "/sec", 4) == 0) {
+    if (strncmp(path_file, "/sleep/", 4) == 0) {
         sec_path(accepted_socket, path_file);
         return;
     }
